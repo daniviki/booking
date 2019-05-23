@@ -1,5 +1,7 @@
 package com.chrysoprase.booking.security;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,13 +12,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static com.chrysoprase.booking.security.SecurityConstants.HEADER_STRING;
+import static com.chrysoprase.booking.security.SecurityConstants.SECRET;
 import static com.chrysoprase.booking.security.SecurityConstants.TOKEN_PREFIX;
 
-public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
+public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-  public JWTAuthorizationFilter(AuthenticationManager authManager) {
+  public JwtAuthorizationFilter(AuthenticationManager authManager) {
     super(authManager);
   }
 
