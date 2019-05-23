@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="http://webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body class="container">
+<h1>Sign in</h1>
+<form style="margin-bottom: 20px" action="/hi" method="post">
+    <label style="display: block" for="username">Username:</label>
+    <input style="display: block" type="text" id="username" name="username">
+    <label style="display: block" for="password">Password:</label>
+    <input style="display: block; margin-bottom: 10px" type="password" id="password" name="password">
+    <input style="display: block" class="col-lg-1 btn text-center" type="submit" value="LOGIN">
+</form>
+<br/>
+<br/>
+<div th:if="${username}">
+    <p th:if="${username.equals('invalid')}" style="color: darkred; margin-bottom: 20px">The provided username doesn't exist.</p>
+</div>
+<div th:if="${password}">
+    <p th:if="${password.equals('invalid')}" style="color: darkred; margin-bottom: 20px">Incorrect password.</p>
+</div>
+<script src="http://webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

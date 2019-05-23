@@ -1,6 +1,6 @@
 package com.chrysoprase.booking.employee;
 
-import com.chrysoprase.booking.company.persistance.Company;
+import com.chrysoprase.booking.company.Company;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
