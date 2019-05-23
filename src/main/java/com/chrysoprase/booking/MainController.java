@@ -4,11 +4,11 @@ import com.chrysoprase.booking.appuser.AppUser;
 import com.chrysoprase.booking.appuser.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class MainController {
 
   private BCryptPasswordEncoder passwordEncoder;
