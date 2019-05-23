@@ -1,6 +1,7 @@
 package com.chrysoprase.booking.security;
 
 import com.auth0.jwt.JWT;
+import com.chrysoprase.booking.appuser.AppUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,8 +35,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   public Authentication attemptAuthentication(HttpServletRequest req,
                                               HttpServletResponse res) throws AuthenticationException {
     try {
-      ApplicationUser creds = new ObjectMapper()
-              .readValue(req.getInputStream(), ApplicationUser.class);
+      AppUser creds = new ObjectMapper()
+              .readValue(req.getInputStream(), AppUser.class);
 
       return authenticationManager.authenticate(
               new UsernamePasswordAuthenticationToken(
