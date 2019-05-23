@@ -56,7 +56,7 @@ public class ErrorHandlingController {
   @ResponseBody
   @ExceptionHandler(EmployeeNotFound.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ErrorMsg handleMissingParameter(EmployeeNotFound exception) {
+  public ErrorMsg handleEmployeeNotFound(EmployeeNotFound exception) {
     return new ErrorMsg("error", exception.getMessage());
   }
 }
