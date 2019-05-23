@@ -1,6 +1,7 @@
 package com.chrysoprase.booking.employee;
 
 import com.chrysoprase.booking.company.persistance.Company;
+import com.chrysoprase.booking.timetable.TimeTable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,4 +30,7 @@ public class Employee {
 
   @ManyToOne
   private Company company;
+
+  @OneToMany
+  private List<TimeTable> timeTables;
 }

@@ -13,8 +13,12 @@ public class EmployeeService {
     this.employeeRepository = employeeRepository;
   }
 
-  private Employee findEmployeeById(Long id) {
-    return employeeRepository.findEmployeeById(id);
+  public boolean isEmployeeExists(String name) {
+    return employeeRepository.existsEmployeeByName(name);
+  }
+
+  public Employee findByEmployeeName(String name) {
+    return employeeRepository.findEmployeeByName(name);
   }
 
 }
