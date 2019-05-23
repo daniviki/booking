@@ -40,4 +40,10 @@ public class MainService {
     AppUser userToReturn = userService.findUserByUsername(user.getUsername());
     return ResponseEntity.ok(userToReturn);
   }
+
+  private AppUser getUserFromAuth(Authentication authentication) {
+    String username = authentication.getPrincipal().toString();
+    return userService.findUserByUsername(username);
+  }
+
 }

@@ -1,6 +1,5 @@
 package com.chrysoprase.booking.employee;
 
-
 import com.chrysoprase.booking.timetable.TimeTable;
 import com.chrysoprase.booking.company.Company;
 import lombok.AllArgsConstructor;

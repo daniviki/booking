@@ -14,7 +14,7 @@ public class TimeTableDAO {
   private String name;
   private String date;
 
-  public TimeTableDAO(String name, String date){
+  public TimeTableDAO(String name, String date) {
     this.name = name;
     this.date = date;
   }
