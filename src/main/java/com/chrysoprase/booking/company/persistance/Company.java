@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,8 @@ public class Company {
 
   private String name;
 
-  @OneToMany
+  @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST,
+          orphanRemoval = true)
   private List<Employee> employees;
 
   @ManyToMany

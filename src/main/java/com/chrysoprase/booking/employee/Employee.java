@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +34,8 @@ public class Employee {
   @ManyToOne
   private Company company;
 
-  @OneToMany
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "employee", cascade = CascadeType.PERSIST,
+          orphanRemoval = true)
   private List<TimeTable> timeTables;
 }

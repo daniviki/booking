@@ -26,21 +26,22 @@ public class TimeTableService {
     this.employeeService = employeeService;
   }
 
-  public List<Date> findTimeTableByEmployee(String employeeName) {
-    Employee employee = employeeService.findByEmployeeName(employeeName);
+  public List<Timestamp> findTimeTableByEmployee(String name) {
+    Employee employee = employeeService.findByEmployeeName(name);
     return timeTableRepo.findByEmployee(employee).stream()
-            .map(TimeTable::getReservedDate)
+            .map(TimeTable::getDate)
             .collect(Collectors.toList());
   }
 
-  private boolean ifReservedDate(String employeeName, Date date) throws ReservedDate {
-    List<Date> reservedDates = findTimeTableByEmployee(employeeName);
+  private boolean ifReservedDate(String name, Date date) throws ReservedDate {
+    List<Timestamp> reservedDates = findTimeTableByEmployee(name);
     if (reservedDates == null) {
       return true;
     }
-    for (Date bookingDate : reservedDates) {
-      if (bookingDate == date) {
-        throw new ReservedDate(employeeName + " is not avilable at this time-slot.");
+    Timestamp dbdate = new Timestamp(date.getTime());
+    for (Timestamp bookingDate : reservedDates) {
+      if (bookingDate == dbdate) {
+        throw new ReservedDate(name + " is not avilable at this time-slot.");
       }
     }
     return true;
