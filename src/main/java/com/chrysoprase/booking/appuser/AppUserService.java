@@ -13,7 +13,7 @@ public class AppUserService {
     this.appUserRepository = appUserRepository;
   }
 
-  public AppUser findAppUserById(Integer id) {
+  public AppUser findAppUserById(Long id) {
     return appUserRepository.findAppUserById(id);
   }
 

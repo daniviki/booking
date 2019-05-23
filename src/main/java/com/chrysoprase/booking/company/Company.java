@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -33,6 +33,10 @@ public class Company {
   @OneToMany
   private List<Employee> employees;
 
-  @ManyToMany
-  private List<Utility> utilities;
+  @ManyToOne
+  private Utility utility;
+
+  public void addEmployee(Employee employee) {
+
+  }
 }
