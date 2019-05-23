@@ -49,7 +49,7 @@ public class ErrorHandlingController {
   @ResponseBody
   @ExceptionHandler(value = ReservedDate.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ErrorMsg handleMissingParameter(ReservedDate exception) {
+  public ErrorMsg handleReservedDate(ReservedDate exception) {
     return new ErrorMsg("error", exception.getMessage());
   }
 

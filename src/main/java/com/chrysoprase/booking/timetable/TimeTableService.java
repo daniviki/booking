@@ -29,7 +29,7 @@ public class TimeTableService {
   private static final String MAILGUN_API_KEY
           = "158d5ba190bcf4bd90afacf43ca22572-52b0ea77-23ee444c";
   private static final String MAILGUN_DOMAIN_NAME
-          = "sandboxc16c1932d9384d5c974eb932752f791d.mailgun.org" ;
+          = "sandboxc16c1932d9384d5c974eb932752f791d.mailgun.org";
 
   @Autowired
   public TimeTableService(TimeTableRepo timeTableRepo, EmployeeService employeeService) {
