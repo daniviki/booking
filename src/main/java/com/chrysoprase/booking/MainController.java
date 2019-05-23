@@ -2,6 +2,8 @@ package com.chrysoprase.booking;
 
 import com.chrysoprase.booking.appuser.AppUser;
 import com.chrysoprase.booking.appuser.AppUserService;
+import com.chrysoprase.booking.company.Company;
+import com.chrysoprase.booking.company.CompanyService;
 import com.chrysoprase.booking.exception.MissingParameterException;
 import com.chrysoprase.booking.exception.WrongPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +21,39 @@ public class MainController {
   private BCryptPasswordEncoder passwordEncoder;
   private AppUserService userService;
   private MainService mainService;
+  private CompanyService companyService;
 
   @Autowired
-  public MainController(AppUserService userService, BCryptPasswordEncoder passwordEncoder, MainService mainService) {
+  public MainController(AppUserService userService, BCryptPasswordEncoder passwordEncoder, MainService mainService, CompanyService companyService) {
     this.userService = userService;
     this.passwordEncoder = passwordEncoder;
     this.mainService = mainService;
+    this.companyService = companyService;
   }
 
-  @GetMapping("/sign-up")
-  public String signUpPage(Model model) {
+  @GetMapping("/user/sign-up")
+  public String userSignUpPage(Model model) {
     model.addAttribute("new_user", new AppUser());
-    return "register_form";
+    return "user_register_form";
   }
 
-  @PostMapping("/sign-up")
-  public String register(@ModelAttribute(name = "new_user") AppUser user) {
+  @PostMapping("/user/sign-up")
+  public String userRegister(@ModelAttribute(name = "new_user") AppUser user) {
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     userService.saveUser(user);
+    return "redirect:/login";
+  }
+
+  @GetMapping("/company/sign-up")
+  public String companySignUpPage(Model model) {
+    model.addAttribute("new_company", new Company());
+    return "company_register_form";
+  }
+
+  @PostMapping("/company/sign-up")
+  public String companyRegister(@ModelAttribute(name = "new_company") Company company) {
+    company.setPassword(passwordEncoder.encode(company.getPassword()));
+    companyService.saveCompany(company);
     return "redirect:/login";
   }
 
@@ -47,19 +64,15 @@ public class MainController {
   }
 
   @PostMapping("/login")
-  public String login(AppUser user) throws MissingParameterException, WrongPasswordException {
+  public String login(Model model, AppUser user) throws MissingParameterException, WrongPasswordException {
+    model.addAttribute("username", user.getUsername());
+    model.addAttribute("password", user.getPassword());
     mainService.login(user);
     return "login_form";
   }
-  
-  /*@RequestMapping(path = "/add", method = RequestMethod.POST)
-  public String addPost(User new_user, HttpServletRequest request) {
-    userService.addUser(new_user);
-    return "redirect:/reddit/user/";
-  }
 
-  @RequestMapping(path = "/add", method = RequestMethod.GET)
-  public String getUserPostForm(Model model) {
-    model.addAttribute("new_user", new User());
-    return "user_addform";*/
+  @GetMapping("/hi")
+  public String hii() {
+    return "hii" ;
+  }
 }
