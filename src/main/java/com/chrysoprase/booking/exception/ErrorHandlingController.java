@@ -46,4 +46,18 @@ public class ErrorHandlingController {
     logger.error("Caused by: {}", exception.getMessage());
     return new ErrorMsg("error", exception.getMessage());
   }
+
+  @ResponseBody
+  @ExceptionHandler(value = ReservedDate.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorMsg handleMissingParameter(ReservedDate exception) {
+    return new ErrorMsg("error", exception.getMessage());
+  }
+
+  @ResponseBody
+  @ExceptionHandler(EmployeeNotFound.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorMsg handleMissingParameter(EmployeeNotFound exception) {
+    return new ErrorMsg("error", exception.getMessage());
+  }
 }

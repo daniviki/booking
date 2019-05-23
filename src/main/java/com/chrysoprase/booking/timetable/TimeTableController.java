@@ -1,7 +1,8 @@
 package com.chrysoprase.booking.timetable;
 
-import com.chrysoprase.booking.exceptions.EmployeeNotFound;
-import com.chrysoprase.booking.exceptions.ReservedDate;
+import com.chrysoprase.booking.exception.EmployeeNotFound;
+import com.chrysoprase.booking.exception.ErrorMsg;
+import com.chrysoprase.booking.exception.ReservedDate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 @RestController

@@ -2,11 +2,18 @@ package com.chrysoprase.booking.timetable;
 
 import com.chrysoprase.booking.employee.Employee;
 import com.chrysoprase.booking.employee.EmployeeService;
-import com.chrysoprase.booking.exceptions.EmployeeNotFound;
-import com.chrysoprase.booking.exceptions.ReservedDate;
+import com.chrysoprase.booking.exception.EmployeeNotFound;
+import com.chrysoprase.booking.exception.ReservedDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import javax.ws.rs.core.MediaType;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +26,8 @@ public class TimeTableService {
 
   private TimeTableRepo timeTableRepo;
   private EmployeeService employeeService;
+  private static final String MAILGUN_API_KEY = "158d5ba190bcf4bd90afacf43ca22572-52b0ea77-23ee444c";
+  private static final String MAILGUN_DOMAIN_NAME = "sandboxc16c1932d9384d5c974eb932752f791d.mailgun.org" ;
 
   @Autowired
   public TimeTableService(TimeTableRepo timeTableRepo, EmployeeService employeeService) {
@@ -40,7 +49,7 @@ public class TimeTableService {
     }
     Timestamp dbdate = new Timestamp(date.getTime());
     for (Timestamp bookingDate : reservedDates) {
-      if (bookingDate == dbdate) {
+      if (bookingDate.equals(dbdate)) {
         throw new ReservedDate(name + " is not avilable at this time-slot.");
       }
     }
@@ -67,5 +76,19 @@ public class TimeTableService {
       Timestamp dbDate = new Timestamp(newDate.getTime());
       addNewBooking(name, dbDate);
     }
+  }
+
+  private static ClientResponse sendSimpleMessage(String recipient) {
+    Client client = Client.create();
+    client.addFilter(new HTTPBasicAuthFilter("api", MAILGUN_API_KEY));
+    WebResource webResource = client.resource("https://api.mailgun.net/v3/" + MAILGUN_DOMAIN_NAME
+            + "/messages");
+    MultivaluedMapImpl formData = new MultivaluedMapImpl();
+    formData.add("from", "Hackathon <chrysoprase>");
+    formData.add("to", recipient);
+    formData.add("subject", "Simple Mailgun Example");
+    formData.add("text", "Plaintext content");
+    return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
+            formData);
   }
 }
