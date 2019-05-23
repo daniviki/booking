@@ -1,4 +1,4 @@
-package com.chrysoprase.booking.company.persistance;
+package com.chrysoprase.booking.company;
 
 import com.chrysoprase.booking.employee.Employee;
 import com.chrysoprase.booking.utility.Utility;
@@ -28,6 +28,8 @@ public class Company {
   private long id;
 
   private String name;
+  private String password;
+  private String email;
 
   @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST,
           orphanRemoval = true)

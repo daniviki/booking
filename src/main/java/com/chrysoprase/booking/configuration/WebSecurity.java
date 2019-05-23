@@ -4,7 +4,6 @@ import com.chrysoprase.booking.security.JwtAuthenticationFilter;
 import com.chrysoprase.booking.security.JwtAuthorizationFilter;
 import com.chrysoprase.booking.security.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import static com.chrysoprase.booking.security.SecurityConstants.LOGIN_URL;
 import static com.chrysoprase.booking.security.SecurityConstants.SIGN_UP_URL;
 
 @EnableWebSecurity
@@ -31,7 +31,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable().authorizeRequests()
-            .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+            .antMatchers(SIGN_UP_URL).permitAll()
+            .antMatchers(LOGIN_URL).permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilter(new JwtAuthenticationFilter(authenticationManager()))

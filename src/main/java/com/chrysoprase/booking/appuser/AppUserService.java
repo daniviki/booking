@@ -24,4 +24,22 @@ public class AppUserService {
   public void saveUser(AppUser user) {
     appUserRepository.save(user);
   }
+
+  public boolean isDatabaseContainsUsername(String username) {
+    return appUserRepository.existsAppUserByUsername(username);
+  }
+
+  public String missingParameter(AppUser user) {
+    String parameters = "";
+    if (user.getUsername() == null && user.getPassword() == null) {
+      return parameters = "username, password";
+    }
+    if (user.getUsername() == null) {
+      return parameters = "username";
+    }
+    if (user.getPassword() == null) {
+      return parameters = "password";
+    }
+    return parameters;
+  }
 }

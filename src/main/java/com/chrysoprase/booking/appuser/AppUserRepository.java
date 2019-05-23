@@ -10,4 +10,6 @@ public interface AppUserRepository extends CrudRepository<AppUser, Integer> {
 
   AppUser findByUsername(String userName);
 
+  boolean existsAppUserByUsername(String userName);
+
 }
