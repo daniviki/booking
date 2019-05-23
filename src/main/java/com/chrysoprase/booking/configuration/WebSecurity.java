@@ -23,9 +23,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
   private BCryptPasswordEncoder passwordEncoder;
 
   public WebSecurity(UserDetailsServiceImpl userDetailsService, BCryptPasswordEncoder
-          bCryptPasswordEncoder) {
+          passwordEncoder) {
     this.userDetailsService = userDetailsService;
-    this.passwordEncoder = bCryptPasswordEncoder;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
