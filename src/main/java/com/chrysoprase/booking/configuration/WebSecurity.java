@@ -4,7 +4,6 @@ import com.chrysoprase.booking.security.JwtAuthenticationFilter;
 import com.chrysoprase.booking.security.JwtAuthorizationFilter;
 import com.chrysoprase.booking.security.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

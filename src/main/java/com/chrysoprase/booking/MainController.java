@@ -24,7 +24,8 @@ public class MainController {
   private CompanyService companyService;
 
   @Autowired
-  public MainController(AppUserService userService, BCryptPasswordEncoder passwordEncoder, MainService mainService, CompanyService companyService) {
+  public MainController(AppUserService userService, BCryptPasswordEncoder passwordEncoder,
+                        MainService mainService, CompanyService companyService) {
     this.userService = userService;
     this.passwordEncoder = passwordEncoder;
     this.mainService = mainService;
@@ -64,7 +65,8 @@ public class MainController {
   }
 
   @PostMapping("/login")
-  public String login(Model model, AppUser user) throws MissingParameterException, WrongPasswordException {
+  public String login(Model model, AppUser user) throws MissingParameterException,
+          WrongPasswordException {
     model.addAttribute("username", user.getUsername());
     model.addAttribute("password", user.getPassword());
     mainService.login(user);
@@ -73,6 +75,6 @@ public class MainController {
 
   @GetMapping("/hi")
   public String hii() {
-    return "hii" ;
+    return "hii";
   }
 }

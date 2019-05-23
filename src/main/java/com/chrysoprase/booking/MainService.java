@@ -1,6 +1,5 @@
 package com.chrysoprase.booking;
 
-
 import com.chrysoprase.booking.exception.MissingParameterException;
 import com.chrysoprase.booking.appuser.AppUser;
 import com.chrysoprase.booking.appuser.AppUserService;
@@ -22,7 +21,8 @@ public class MainService {
     this.userService = userService;
   }
 
-  public ResponseEntity login(AppUser user) throws WrongPasswordException, MissingParameterException {
+  public ResponseEntity login(AppUser user) throws WrongPasswordException,
+          MissingParameterException {
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     boolean isDatabaseContainsUsername =
             userService.isDatabaseContainsUsername(user.getUsername());
