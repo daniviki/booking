@@ -13,7 +13,15 @@ public class AppUserService {
     this.appUserRepository = appUserRepository;
   }
 
-  private AppUser findAppUserById(Long id) {
+  public AppUser findAppUserById(Integer id) {
     return appUserRepository.findAppUserById(id);
+  }
+
+  public AppUser findUserByUsername(String userName) {
+    return appUserRepository.findByUsername(userName);
+  }
+
+  public void saveUser(AppUser user) {
+    appUserRepository.save(user);
   }
 }

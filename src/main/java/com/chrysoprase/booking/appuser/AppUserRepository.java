@@ -4,8 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AppUserRepository extends CrudRepository<AppUser, Long> {
+public interface AppUserRepository extends CrudRepository<AppUser, Integer> {
 
-  AppUser findAppUserById(Long id);
+  AppUser findAppUserById(Integer id);
+
+  AppUser findByUsername(String userName);
 
 }
