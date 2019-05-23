@@ -15,11 +15,11 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class Utility {
+public abstract class Utility {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String type;
+  private UtilityType type;
 }
