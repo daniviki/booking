@@ -1,4 +1,4 @@
-package com.chrysoprase.booking.exceptions;
+package com.chrysoprase.booking.exception;
 
 public class ReservedDate extends Exception {
 

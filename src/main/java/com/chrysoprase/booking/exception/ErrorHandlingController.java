@@ -1,6 +1,5 @@
 package com.chrysoprase.booking.exception;
 
-import com.chrysoprase.booking.exception.MissingParameterException;
 import com.greenfoxacademy.tribeschrysoprase.exception.invaliduserexception.InvalidUserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +43,20 @@ public class ErrorHandlingController {
   @ResponseStatus(HttpStatus.CONFLICT)
   public ErrorMsg handleInvalidUser(InvalidUserException exception) {
     logger.error("Caused by: {}", exception.getMessage());
+    return new ErrorMsg("error", exception.getMessage());
+  }
+
+  @ResponseBody
+  @ExceptionHandler(value = ReservedDate.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorMsg handleReservedDate(ReservedDate exception) {
+    return new ErrorMsg("error", exception.getMessage());
+  }
+
+  @ResponseBody
+  @ExceptionHandler(EmployeeNotFound.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorMsg handleEmployeeNotFound(EmployeeNotFound exception) {
     return new ErrorMsg("error", exception.getMessage());
   }
 }

@@ -1,7 +1,7 @@
 package com.chrysoprase.booking.timetable;
 
-import com.chrysoprase.booking.exceptions.EmployeeNotFound;
-import com.chrysoprase.booking.exceptions.ReservedDate;
+import com.chrysoprase.booking.exception.EmployeeNotFound;
+import com.chrysoprase.booking.exception.ReservedDate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
