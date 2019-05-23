@@ -1,6 +1,7 @@
 package com.chrysoprase.booking.company.persistance;
 
 import com.chrysoprase.booking.employee.Employee;
+import com.chrysoprase.booking.utility.Utility;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-/*
 import javax.persistence.ManyToMany;
-*/
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -32,6 +31,6 @@ public class Company {
   @OneToMany
   private List<Employee> employees;
 
-  /*@ManyToMany
-  private List<Utility> utilities;*/
+  @ManyToMany
+  private List<Utility> utilities;
 }
