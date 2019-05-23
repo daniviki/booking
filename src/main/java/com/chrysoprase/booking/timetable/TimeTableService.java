@@ -26,8 +26,10 @@ public class TimeTableService {
 
   private TimeTableRepo timeTableRepo;
   private EmployeeService employeeService;
-  private static final String MAILGUN_API_KEY = "158d5ba190bcf4bd90afacf43ca22572-52b0ea77-23ee444c";
-  private static final String MAILGUN_DOMAIN_NAME = "sandboxc16c1932d9384d5c974eb932752f791d.mailgun.org" ;
+  private static final String MAILGUN_API_KEY
+          = "158d5ba190bcf4bd90afacf43ca22572-52b0ea77-23ee444c";
+  private static final String MAILGUN_DOMAIN_NAME
+          = "sandboxc16c1932d9384d5c974eb932752f791d.mailgun.org" ;
 
   @Autowired
   public TimeTableService(TimeTableRepo timeTableRepo, EmployeeService employeeService) {
@@ -81,13 +83,13 @@ public class TimeTableService {
   private static ClientResponse sendSimpleMessage(String recipient) {
     Client client = Client.create();
     client.addFilter(new HTTPBasicAuthFilter("api", MAILGUN_API_KEY));
-    WebResource webResource = client.resource("https://api.mailgun.net/v3/" + MAILGUN_DOMAIN_NAME
-            + "/messages");
     MultivaluedMapImpl formData = new MultivaluedMapImpl();
     formData.add("from", "Hackathon <chrysoprase>");
     formData.add("to", recipient);
     formData.add("subject", "Simple Mailgun Example");
     formData.add("text", "Plaintext content");
+    WebResource webResource = client.resource("https://api.mailgun.net/v3/" + MAILGUN_DOMAIN_NAME
+            + "/messages");
     return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
             formData);
   }

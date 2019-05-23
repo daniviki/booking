@@ -1,6 +1,5 @@
 package com.chrysoprase.booking.exception;
 
-import com.chrysoprase.booking.exception.MissingParameterException;
 import com.greenfoxacademy.tribeschrysoprase.exception.invaliduserexception.InvalidUserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
