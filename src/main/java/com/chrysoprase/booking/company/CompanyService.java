@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.MediaType;
 
+import java.util.List;
+
 @Service
 public class CompanyService {
   private CompanyRepository companyRepository;
@@ -58,5 +60,13 @@ public class CompanyService {
             + "/messages");
     return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
             formData);
+  }
+
+  public List<Company> getAllCompanies() {
+    return (List<Company>)companyRepository.findAll();
+  }
+
+  public List<Company> companiesWithCertainUtility(String utiliy) {
+    return companyRepository.findCompaniesByUtility_TypeIsContaining(utiliy);
   }
 }

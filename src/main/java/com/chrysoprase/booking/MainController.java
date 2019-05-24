@@ -15,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 @Controller
@@ -85,5 +88,20 @@ public class MainController {
   @GetMapping("/home")
   public String hii() {
     return "index";
+  }
+
+  @GetMapping("/companies")
+  public String companyList(Model model) {
+    List<Company> companyList = companyService.getAllCompanies();
+    model.addAttribute("compList", companyList);
+    return "full_list";
+  }
+
+  @PostMapping("/companies/filtered")
+  public String filteredCompanyList(@RequestParam(name = "typeFilter") String utilityType,
+                                    Model model) {
+    List<Company> filteredList = companyService.companiesWithCertainUtility(utilityType);
+    model.addAttribute("compList", filteredList);
+    return "full_list";
   }
 }
