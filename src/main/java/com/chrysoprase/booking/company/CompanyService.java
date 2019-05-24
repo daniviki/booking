@@ -4,6 +4,8 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CompanyService {
   private CompanyRepository companyRepository;
@@ -27,5 +29,13 @@ public class CompanyService {
       saveCompany(updateCompany);
     }
     throw new NotFoundException("Yoyoyoyo, you'll've no company mate!");
+  }
+
+  public List<Company> getAllCompanies() {
+    return (List<Company>)companyRepository.findAll();
+  }
+
+  public List<Company> companiesWithCertainUtility(String utiliy) {
+    return companyRepository.findCompaniesByUtility_TypeIsContaining(utiliy);
   }
 }
