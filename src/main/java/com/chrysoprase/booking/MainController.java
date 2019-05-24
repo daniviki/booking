@@ -28,7 +28,8 @@ public class MainController {
 
   @Autowired
   public MainController(AppUserService userService, BCryptPasswordEncoder passwordEncoder,
-                        MainService mainService, CompanyService companyService, UtilityService utilityService) {
+                        MainService mainService, CompanyService companyService,
+                        UtilityService utilityService) {
     this.userService = userService;
     this.passwordEncoder = passwordEncoder;
     this.mainService = mainService;
