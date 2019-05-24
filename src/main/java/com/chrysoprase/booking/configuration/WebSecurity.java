@@ -14,6 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import static com.chrysoprase.booking.security.SecurityConstants.COMPANY_SIGN_UP_URL;
 import static com.chrysoprase.booking.security.SecurityConstants.LOGIN_URL;
 import static com.chrysoprase.booking.security.SecurityConstants.SIGN_UP_URL;
 
@@ -33,6 +34,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     http.cors().and().csrf().disable().authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
             .antMatchers(LOGIN_URL).permitAll()
+            .antMatchers(COMPANY_SIGN_UP_URL).permitAll()
             .antMatchers("/companies").permitAll()
             .antMatchers("/companies/filtered").permitAll()
             .anyRequest().authenticated()
