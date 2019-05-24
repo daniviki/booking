@@ -12,7 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -31,10 +32,11 @@ public class Company {
   private String password;
   private String email;
 
-  @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST,
-          orphanRemoval = true)
+  @OneToMany
+  @JoinColumn(name = "company_id")
   private List<Employee> employees;
 
-  @ManyToMany
-  private List<Utility> utilities;
+  @ManyToOne
+  @JoinColumn(name = "company_id")
+  private Utility utility;
 }
