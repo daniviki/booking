@@ -5,7 +5,9 @@ import com.chrysoprase.booking.appuser.AppUserService;
 import com.chrysoprase.booking.company.Company;
 import com.chrysoprase.booking.company.CompanyService;
 import com.chrysoprase.booking.exception.MissingParameterException;
+import com.chrysoprase.booking.exception.WrongEmailException;
 import com.chrysoprase.booking.exception.WrongPasswordException;
+import com.chrysoprase.booking.exception.WrongUsernameException;
 import com.chrysoprase.booking.utility.Utility;
 import com.chrysoprase.booking.utility.UtilityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,8 @@ public class MainController {
   }
 
   @PostMapping("/user/sign-up")
-  public String userRegister(@ModelAttribute(name = "new_user") AppUser user) {
+  public String userRegister(@ModelAttribute(name = "new_user") AppUser user)
+          throws WrongEmailException, WrongUsernameException {
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     userService.saveUser(user);
     return "redirect:/login";
@@ -62,8 +65,10 @@ public class MainController {
   }
 
   @PostMapping("/company/sign-up")
-  public String companyRegister(@ModelAttribute(name = "new_utility") Utility utility,
-          @ModelAttribute(name = "new_company") Company company) {
+  public String companyRegister(@ModelAttribute(name = "new_utility")
+                                          Utility utility,
+          @ModelAttribute(name = "new_company") Company company)
+          throws WrongEmailException, WrongUsernameException {
     utilityService.addUtility(utility);
     company.setPassword(passwordEncoder.encode(company.getPassword()));
     companyService.saveCompany(company);
