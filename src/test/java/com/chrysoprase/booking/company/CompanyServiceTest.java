@@ -1,5 +1,7 @@
 package com.chrysoprase.booking.company;
 
+import com.chrysoprase.booking.exception.WrongEmailException;
+import com.chrysoprase.booking.exception.WrongUsernameException;
 import javassist.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +30,8 @@ public class CompanyServiceTest {
   }
 
   @Test(expected = NotFoundException.class)
-  public void companyService_updateCompany_throwsException() throws NotFoundException {
+  public void companyService_updateCompany_throwsException()
+          throws NotFoundException, WrongEmailException, WrongUsernameException {
     when(companyRepository.findCompanyById(any(Long.class))).thenReturn(null);
     companyService.updateCompany(new Company());
   }
