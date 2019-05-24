@@ -12,4 +12,6 @@ public interface AppUserRepository extends CrudRepository<AppUser, Integer> {
 
   boolean existsAppUserByUsername(String userName);
 
+  boolean existsAppUserByEmail(String email);
+
 }

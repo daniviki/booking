@@ -23,6 +23,22 @@ public class ErrorHandlingController {
   }
 
   @ResponseBody
+  @ExceptionHandler(value = WrongUsernameException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorMsg handleWrongUsernameException(WrongUsernameException exception) {
+    logger.error("Caused by: {}", exception.getMessage());
+    return new ErrorMsg("error", exception.getMessage());
+  }
+
+  @ResponseBody
+  @ExceptionHandler(value = WrongEmailException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorMsg handleWrongEmailException(WrongEmailException exception) {
+    logger.error("Caused by: {}", exception.getMessage());
+    return new ErrorMsg("error", exception.getMessage());
+  }
+
+  @ResponseBody
   @ExceptionHandler(value = WrongPasswordException.class)
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   public ErrorMsg handleWrongPassword(WrongPasswordException exception) {
