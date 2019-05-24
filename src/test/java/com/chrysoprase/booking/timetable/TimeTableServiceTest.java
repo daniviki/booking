@@ -1,10 +1,7 @@
-package com.chrysoprase.booking.TimeTableService;
+package com.chrysoprase.booking.timetable;
 
-import com.chrysoprase.booking.employee.Employee;
 import com.chrysoprase.booking.employee.EmployeeService;
 import com.chrysoprase.booking.exception.ReservedDate;
-import com.chrysoprase.booking.timetable.TimeTableRepo;
-import com.chrysoprase.booking.timetable.TimeTableService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,19 +44,4 @@ public class TimeTableServiceTest {
     when(timeTableService.findTimeTableByEmployee(any(String.class))).thenReturn(emptyList);
     assertTrue(timeTableService.ifReservedDate("Nincs", date));
   }
-
-  @Test(expected = ReservedDate.class)
-  public void timeTableService_isReservedDate_throwsException() throws ReservedDate {
-    Employee testEmp = new Employee();
-    testEmp.setName("Fake");
-    Date date = new Date(System.currentTimeMillis());
-    List<Timestamp> testList = new ArrayList<>();
-    Timestamp testTime = new Timestamp(date.getTime());
-    testList.add(testTime);
-    //when(timeTableService.findTimeTableByEmployee("Fake")).thenReturn(testList);
-    when(employeeService.findByEmployeeName("Fake")).thenReturn(testEmp);
-    when(timeTableService.findTimeTableByEmployee(testEmp.getName())).thenReturn(testList);
-    timeTableService.ifReservedDate("Fake", date);
-  }
-
 }

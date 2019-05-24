@@ -1,8 +1,5 @@
-package com.chrysoprase.booking.AppUserService;
+package com.chrysoprase.booking.appuser;
 
-import com.chrysoprase.booking.appuser.AppUser;
-import com.chrysoprase.booking.appuser.AppUserRepository;
-import com.chrysoprase.booking.appuser.AppUserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

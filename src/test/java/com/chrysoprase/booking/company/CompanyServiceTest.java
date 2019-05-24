@@ -1,8 +1,5 @@
-package com.chrysoprase.booking.CompanyService;
+package com.chrysoprase.booking.company;
 
-import com.chrysoprase.booking.company.Company;
-import com.chrysoprase.booking.company.CompanyRepository;
-import com.chrysoprase.booking.company.CompanyService;
 import javassist.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
