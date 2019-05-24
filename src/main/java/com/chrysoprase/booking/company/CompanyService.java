@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.MediaType;
 
+import java.util.List;
+
 @Service
 public class CompanyService {
   private CompanyRepository companyRepository;
@@ -36,17 +38,24 @@ public class CompanyService {
     companyRepository.save(company);
   }
 
-  public void updateCompany(Company company) throws NotFoundException,
-          WrongEmailException, WrongUsernameException {
-    boolean isUpdateAble = companyRepository.findById(company.getId()).isPresent();
-    if (isUpdateAble) {
-      Company updateCompany = companyRepository.findById(company.getId()).get();
-      updateCompany.setEmployees(company.getEmployees());
-      updateCompany.setUtility(company.getUtility());
-      updateCompany.setName(company.getName());
-      saveCompany(updateCompany);
+  private Company returnById(Long id) {
+    return companyRepository.findCompanyById(id);
+  }
+
+  public void updateCompany(Company company)
+          throws NotFoundException, WrongEmailException, WrongUsernameException {
+    Company updateCompany = returnById(company.getId());
+    if (updateCompany == null) {
+      throw new NotFoundException("Yoyoyoyo, you'll've no company mate!");
+    } else if (companyRepository.existsByEmail(updateCompany.getEmail())) {
+      throw new WrongEmailException("This email is already is use");
+    } else if (companyRepository.existsByName(updateCompany.getName())) {
+      throw new WrongEmailException("This name already is use");
     }
-    throw new NotFoundException("Yoyoyoyo, you'll've no company mate!");
+    updateCompany.setEmployees(company.getEmployees());
+    updateCompany.setUtility(company.getUtility());
+    updateCompany.setName(company.getName());
+    saveCompany(updateCompany);
   }
 
   private static ClientResponse sendSimpleMessage(String recipient) {
@@ -61,5 +70,13 @@ public class CompanyService {
             + "/messages");
     return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
             formData);
+  }
+
+  public List<Company> getAllCompanies() {
+    return (List<Company>) companyRepository.findAll();
+  }
+
+  public List<Company> companiesWithCertainUtility(String utiliy) {
+    return companyRepository.findCompaniesByUtility_TypeIsContaining(utiliy);
   }
 }
