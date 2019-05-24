@@ -24,7 +24,7 @@ public class CompanyService {
     if (isUpdateAble) {
       Company updateCompany = companyRepository.findById(company.getId()).get();
       updateCompany.setEmployees(company.getEmployees());
-      updateCompany.setUtilities(company.getUtilities());
+      updateCompany.setUtility(company.getUtility());
       updateCompany.setName(company.getName());
       saveCompany(updateCompany);
     }

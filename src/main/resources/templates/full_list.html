@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chrysoprase Booking</title>
 </head>
 <body>
+<form th:action="@{/companies/filtered}" action="#" method="post">
+    <label for="utilityType">Search for utility</label>
+    <input type="text" name="typeFilter" id="utilityType">
+    <button type="submit">Search</button>
 
+</form>
+<table>
+    <tr th:each="comp:${compList}">
+        <td th:text="${comp.name}"></td>
+        <td th:text="${comp.utility.type}"></td>
+    </tr>
+</table>
+<a href="/companies">Return to all companies</a>
+<a href="/logout">Logout</a>
 </body>
 </html>
