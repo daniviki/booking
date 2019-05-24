@@ -1,5 +1,6 @@
 package com.chrysoprase.booking.utility;
 
+import com.chrysoprase.booking.company.Company;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,4 +26,8 @@ public class Utility {
   private Long id;
 
   private String type;
+
+  @OneToMany
+  @JoinColumn(name = "utility_id")
+  private List<Company> companies;
 }
