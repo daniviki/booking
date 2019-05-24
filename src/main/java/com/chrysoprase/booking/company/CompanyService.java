@@ -17,10 +17,13 @@ public class CompanyService {
     companyRepository.save(company);
   }
 
+  private Company returnById(Long id) {
+    return companyRepository.findCompanyById(id);
+  }
+
   public void updateCompany(Company company) throws NotFoundException {
-    boolean isUpdateAble = companyRepository.findById(company.getId()).isPresent();
-    if (isUpdateAble) {
-      Company updateCompany = companyRepository.findById(company.getId()).get();
+    Company updateCompany = returnById(company.getId());
+    if (updateCompany != null) {
       updateCompany.setEmployees(company.getEmployees());
       updateCompany.setUtilities(company.getUtilities());
       updateCompany.setName(company.getName());
