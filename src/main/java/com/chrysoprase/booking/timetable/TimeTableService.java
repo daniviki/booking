@@ -44,7 +44,7 @@ public class TimeTableService {
             .collect(Collectors.toList());
   }
 
-  private boolean ifReservedDate(String name, Date date) throws ReservedDate {
+  public boolean ifReservedDate(String name, Date date) throws ReservedDate {
     List<Timestamp> reservedDates = findTimeTableByEmployee(name);
     if (reservedDates == null) {
       return true;

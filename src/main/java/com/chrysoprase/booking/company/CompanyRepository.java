@@ -9,4 +9,7 @@ import java.util.List;
 public interface CompanyRepository extends CrudRepository<Company, Long> {
 
   List<Company> findCompaniesByUtility_TypeIsContaining(String utility);
+
+  Company findCompanyById(Long id);
+
 }
